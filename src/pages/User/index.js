@@ -67,6 +67,12 @@ export default class User extends Component {
     this.setState({ refreshing: true, stars: [] }, this.load);
   };
 
+  handleNavigate = repository => {
+    const { navigation } = this.props;
+
+    navigation.navigate('Repository', { repository });
+  };
+
   render() {
     const { stars, loading, refreshing } = this.state;
     const { navigation } = this.props;
@@ -91,7 +97,7 @@ export default class User extends Component {
             onRefresh={this.refreshList}
             refreshing={refreshing}
             renderItem={({ item }) => (
-              <Starred>
+              <Starred onPress={() => this.handleNavigate(item)}>
                 <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
                 <Info>
                   <Title>{item.name}</Title>
