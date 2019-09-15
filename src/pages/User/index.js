@@ -14,6 +14,7 @@ import {
   Author,
   Stars,
   Loading,
+  Empty,
 } from './styles';
 
 export default class User extends Component {
@@ -47,12 +48,18 @@ export default class User extends Component {
       params: { page },
     });
 
-    this.setState({
-      stars: page > 2 ? [...stars, ...response.data] : response.data,
-      loading: false,
-      page,
-      refreshing: false,
-    });
+    if (response.data.length > 0) {
+      this.setState({
+        stars: page > 2 ? [...stars, ...response.data] : response.data,
+        loading: false,
+        page,
+        refreshing: false,
+      });
+    } else {
+      this.setState({
+        loading: false,
+      });
+    }
   };
 
   loadMore = () => {
@@ -91,11 +98,14 @@ export default class User extends Component {
         ) : (
           <Stars
             data={stars}
-            keyExtractor={star => String(star.id)}
-            onEndReachedThreshold={0.2}
-            onEndReached={this.loadMore}
+            ListHeaderComponent={() =>
+              !stars.length ? <Empty>The list is empty</Empty> : null
+            }
             onRefresh={this.refreshList}
             refreshing={refreshing}
+            onEndReachedThreshold={0.2}
+            onEndReached={this.loadMore}
+            keyExtractor={star => String(star.id)}
             renderItem={({ item }) => (
               <Starred onPress={() => this.handleNavigate(item)}>
                 <OwnerAvatar source={{ uri: item.owner.avatar_url }} />

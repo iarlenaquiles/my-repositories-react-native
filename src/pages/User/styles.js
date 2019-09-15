@@ -86,3 +86,14 @@ export const Loading = styled.ActivityIndicator.attrs({
   align-items: center;
   margin-top: 20px;
 `;
+
+export const Empty = styled.Text`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  padding: 30px;
+  color: #7159c1;
+  align-content: center;
+  text-align: center;
+`;
