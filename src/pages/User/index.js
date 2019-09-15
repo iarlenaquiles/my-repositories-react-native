@@ -98,7 +98,7 @@ export default class User extends Component {
         ) : (
           <Stars
             data={stars}
-            ListHeaderComponent={() =>
+            ListEmptyComponent={() =>
               !stars.length ? <Empty>The list is empty</Empty> : null
             }
             onRefresh={this.refreshList}
