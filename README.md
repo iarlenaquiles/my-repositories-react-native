@@ -1,4 +1,4 @@
-# :computer: Aplicação Mobile em React Native
+# :phone: Aplicação Mobile em React Native
 
 ![Cena 01](image-01.jpeg)
 
